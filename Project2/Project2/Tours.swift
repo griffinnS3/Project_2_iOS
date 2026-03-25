@@ -38,7 +38,7 @@ class ToursViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vm = toursvm.tours[indexPath.row]
-        present(ToursDetailView(videoURL: vm.videoURL, audioURL: vm.audioURL),animated: true)
+        navigationController?.pushViewController(ToursDetailView(videoURL: vm.videoURL, audioURL: vm.audioURL),animated: true)
     }
 }
 class ToursTableViewCell: UITableViewCell {

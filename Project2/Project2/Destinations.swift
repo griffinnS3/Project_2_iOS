@@ -33,7 +33,7 @@ class DestinationsViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let vm = destinationsViewModel.objects[indexPath.row]
-        present(DestinationDetailView( labelText: vm.title, address: vm.title), animated: true)
+        navigationController?.pushViewController(DestinationDetailView( labelText: vm.title, address: vm.title), animated: true)
     }
         }
 

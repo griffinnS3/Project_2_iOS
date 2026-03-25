@@ -11,6 +11,7 @@ import SnapKit
 class NotesTableViewCell: UITableViewCell {
     
     var label = UILabel()
+    var imageV = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,6 +28,7 @@ class NotesTableViewCell: UITableViewCell {
     
     func configure(note: Note) {
         label.text = note.title
+//        imageV.image = note.image
     }
     
     

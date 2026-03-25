@@ -30,7 +30,7 @@ class LinksViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vm = linkvm.links[indexPath.row]
         if let url = vm.url {
-          present(LinkDetailView(url: url), animated: true)
+          navigationController?.pushViewController(LinkDetailView(url: url), animated: true)
         } else {
             print("Could not construct URL")
         }

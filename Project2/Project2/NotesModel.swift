@@ -10,12 +10,11 @@ import UIKit
 struct Note : Codable {
     var title: String
     var content: String
+//    var photo: Data?
 }
-
 class NotesViewModel : NSObject {
     
     var data: [[Note]] = [[]]
-    
     
     override init() {
         super.init()

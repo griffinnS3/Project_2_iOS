@@ -41,6 +41,11 @@ class TableViewController: UITableViewController {
         }
     }
     override func viewWillAppear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        defaults.set(UIImage.add.pngData(), forKey: "Image")
+        if let data = defaults.data(forKey: "Image") {
+//            viewModel.object.photo = UIImage(data: data)
+        }
         if let savedData = UserDefaults.standard.data(forKey: "savedData"),
            let decodedData = (try? JSONDecoder().decode(
             [[Note]].self,

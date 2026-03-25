@@ -58,11 +58,13 @@ class DestinationDetailView: UIViewController {
         view.addSubview(descriptionLabel)
         /**https://www.google.com/search?q=How+do+i+get+my+text+to+fit+in+a+label+in+swift&sca_esv=111f151f5b064434&rlz=1C5GCEM_enUS1198US1199&biw=1268&bih=1243&sxsrf=ANbL-n6fpbDA8GHpXpWom8JB64rMhmzqJQ%3A1774122449253&ei=0fW-aaDuDsiu5NoP8ICDiAQ&ved=0ahUKEwjgmoCT4bGTAxVIF1kFHXDAAEEQ4dUDCBE&uact=5&oq=How+do+i+get+my+text+to+fit+in+a+label+in+swift&gs_lp=Egxnd3Mtd2l6LXNlcnAiL0hvdyBkbyBpIGdldCBteSB0ZXh0IHRvIGZpdCBpbiBhIGxhYmVsIGluIHN3aWZ0MgUQIRigATIFECEYoAEyBRAhGKsCSMh-UIQGWPl6cBt4AJABAZgBggGgAeYsqgEENjYuN7gBA8gBAPgBAZgCY6AC9y6oAgrCAhcQABiABBiRAhi0AhjnBhiKBRjqAtgBAcICEBAAGAMYtAIY6gIYjwHYAQHCAgsQABiABBiRAhiKBcICERAuGIAEGLEDGNEDGIMBGMcBwgILEC4YgAQY0QMYxwHCAgUQLhiABMICDhAuGIAEGLEDGNEDGMcBwgIOEAAYgAQYsQMYgwEYigXCAg4QLhiABBixAxiDARiKBcICCxAAGIAEGLEDGIMBwgIKEC4YgAQYQxiKBcICCxAuGIAEGLEDGIMBwgIEEAAYA8ICCxAAGIAEGLEDGIoFwgIIEC4YgAQYsQPCAgUQABiABMICCBAAGIAEGLEDwgIKEAAYgAQYQxiKBcICBhAAGBYYHsICBxAAGIAEGA3CAgsQABiABBiGAxiKBcICBRAAGO8FwgIIEAAYogQYiQXCAggQABiABBiiBMICBxAhGKABGAqYAwLxBV2pbnhFLN5ZugYECAEYB5IHBTg2LjEzoAeB-gOyBwU1OS4xM7gHmC7CBwczLjY5LjI3yAfpAYAIAA&sclient=gws-wiz-serp**/
         descriptionLabel.numberOfLines = 0
+        label.textAlignment = .center
         background.backgroundColor = .systemBackground
                 label.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(view)
+                    make.width.equalTo(view).multipliedBy(0.5)
             make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(10)
+            make.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         mapView.snp.makeConstraints { make in
             make.width.equalTo(view)
@@ -104,7 +106,7 @@ class DestinationDetailView: UIViewController {
             let coordinate = MKPointAnnotation(__coordinate: placemark?.location?.coordinate ?? CLLocationCoordinate2D())
             self.mapView.addAnnotation(coordinate)
             let areaCoordinate = placemark?.location?.coordinate ?? CLLocationCoordinate2D()
-            let span = MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25)
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
             self.mapView.setRegion(MKCoordinateRegion(center: areaCoordinate, span: span), animated: true)
         }
         }
