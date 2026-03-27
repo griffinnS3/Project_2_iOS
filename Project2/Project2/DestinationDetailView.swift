@@ -103,7 +103,7 @@ class DestinationDetailView: UIViewController {
             print(annotations?.first ?? "")
             let placemark = annotations?.first
             print(placemark?.location?.coordinate ?? "")
-            let coordinate = MKPointAnnotation(coordinate: placemark?.location?.coordinate ?? CLLocationCoordinate2D())
+            let coordinate = MKPointAnnotation(__coordinate: placemark?.location?.coordinate ?? CLLocationCoordinate2D())
             self.mapView.addAnnotation(coordinate)
             let areaCoordinate = placemark?.location?.coordinate ?? CLLocationCoordinate2D()
             let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)

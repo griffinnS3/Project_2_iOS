@@ -10,7 +10,17 @@ import UIKit
 struct Note : Codable {
     var title: String
     var content: String
-//    var photo: Data?
+    var photo: Data?
+    // I got this method from Claude
+    var image: UIImage? {
+            get {
+                guard let data = photo else { return nil }
+                return UIImage(data: data)
+            }
+            set {
+                photo = newValue?.jpegData(compressionQuality: 0.8)
+            }
+        }
 }
 class NotesViewModel : NSObject {
     
@@ -56,5 +66,12 @@ class NotesViewModel : NSObject {
     }
     func deleteObject(indexPath: IndexPath) {
         data[indexPath.section].remove(at: indexPath.row)
+    }
+    func createNote(title: String, content: String, imageData: Data?) {
+        data[0].insert(Note(title: title, content: content, photo: imageData), at: 0)
+    }
+    func updateNote(at indexPath: IndexPath, title: String, content: String, imageData: Data?) {
+        let note = Note(title: title, content: content, photo: imageData)
+        data[indexPath.section][indexPath.row] = note
     }
 }

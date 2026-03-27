@@ -17,8 +17,19 @@ class NotesTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(label)
+        contentView.addSubview(imageV)
+        imageV.contentMode = .scaleAspectFit
+        imageV.clipsToBounds = true
+        
         label.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.right.bottom.top.equalToSuperview()
+            $0.height.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.75)
+        }
+        imageV.snp.makeConstraints { make in
+            make.left.equalTo(label.snp.right)
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(label)
         }
     }
     
@@ -28,7 +39,7 @@ class NotesTableViewCell: UITableViewCell {
     
     func configure(note: Note) {
         label.text = note.title
-//        imageV.image = note.image
+        imageV.image = note.image
     }
     
     

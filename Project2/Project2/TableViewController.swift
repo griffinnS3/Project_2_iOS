@@ -10,6 +10,7 @@ import UIKit
 class TableViewController: UITableViewController {
     
     let viewModel = NotesViewModel()
+    let button = UIBarButtonItem()
     
     override func viewDidLoad() {
         tableView.delegate = self
@@ -18,8 +19,17 @@ class TableViewController: UITableViewController {
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "Header View")
         tableView.register(FooterView.self, forHeaderFooterViewReuseIdentifier: "Footer View")
         navigationItem.rightBarButtonItem = editButtonItem
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addNote))
+        if let savedData = UserDefaults.standard.data(forKey: "savedData"),
+           let decodedData = (try? JSONDecoder().decode(
+            [[Note]].self,
+            from: savedData
+           )) {
+            viewModel.data = decodedData
+        }
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         if let vm = viewModel.object(for: indexPath),
            let cell = tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCell") as? NotesTableViewCell {
             cell.configure(note: vm)
@@ -40,19 +50,16 @@ class TableViewController: UITableViewController {
             UserDefaults.standard.set(encoded, forKey: "savedData")
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        let defaults = UserDefaults.standard
-        defaults.set(UIImage.add.pngData(), forKey: "Image")
-        if let data = defaults.data(forKey: "Image") {
-//            viewModel.object.photo = UIImage(data: data)
-        }
-        if let savedData = UserDefaults.standard.data(forKey: "savedData"),
-           let decodedData = (try? JSONDecoder().decode(
-            [[Note]].self,
-            from: savedData
-           )) {
-            viewModel.data = decodedData
-        }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(NoteDetailView(title: viewModel.data[indexPath.section][indexPath.row].title, text: viewModel.data[indexPath.section][indexPath.row].content, viewModel: viewModel, isNew: false, indexPath: indexPath), animated: true)
+    }
+    override func viewWillAppear(_ animated: Bool) {       
+        tableView.reloadData()
+    }
+    @objc func addNote () {
+        let detailVC = NoteDetailView(title: "", text: "", viewModel: viewModel, isNew: true, indexPath: IndexPath(row: 0, section: 0))
+        navigationController?.pushViewController(detailVC, animated: true)
+        
     }
 }
 extension TableViewController {
@@ -84,6 +91,7 @@ extension TableViewController {
         }
     }
 }
+
 
 
 
