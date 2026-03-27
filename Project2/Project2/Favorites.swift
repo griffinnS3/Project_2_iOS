@@ -7,15 +7,27 @@
 
 import UIKit
 
-class FavoritesView: UIViewController {
+class FavoritesView: UITableViewController {
 
+    var favoriteViewModel = FavoritesTableViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-      let label = UILabel()
-        label.text = "Hello, World!"
-        view.addSubview(label)
+        tableView.delegate = self
+        tableView.register(FavoritesTableCell.self, forCellReuseIdentifier: "FavoritesCellReuseIdentifier")
     }
-
-
+    
+        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return favoriteViewModel.objects.count
+        }
+        
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCellReuseIdentifier") as? FavoritesTableCell {
+                let vm = favoriteViewModel.objects[indexPath.row]
+                cell.configure(vm: vm)
+                return cell
+            } else {
+                return UITableViewCell()
+            }
+            }
 }
 

@@ -5,7 +5,7 @@
 //  Created by Smith01, Griffin on 3/20/26.
 //
 import UIKit
-struct Destination {
+struct Destination : Favorite {
     var title: String
     var image: UIImage?
 }

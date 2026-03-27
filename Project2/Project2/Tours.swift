@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 /**https://stackoverflow.com/questions/25348877/how-to-play-a-local-video-with-swift**/
-struct Tours {
+struct Tours : Favorite{
 var title: String
 var videoURL: URL?
 var audioURL: URL?
