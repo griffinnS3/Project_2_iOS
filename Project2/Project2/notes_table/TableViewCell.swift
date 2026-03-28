@@ -27,9 +27,10 @@ class NotesTableViewCell: UITableViewCell {
             $0.width.equalToSuperview().multipliedBy(0.75)
         }
         imageV.snp.makeConstraints { make in
-            make.left.equalTo(label.snp.right)
+            make.right.equalTo(label.snp.left)
             make.top.bottom.equalToSuperview()
-            make.width.equalTo(label)
+           
+            make.width.equalToSuperview().multipliedBy(0.25)
         }
     }
     

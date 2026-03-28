@@ -20,6 +20,7 @@ class ToursViewController: UITableViewController {
     let toursvm = ToursTableModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Tours"
         tableView.delegate = self
         tableView.register(ToursTableViewCell.self, forCellReuseIdentifier: "cell")
     }

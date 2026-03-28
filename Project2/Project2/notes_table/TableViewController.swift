@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class TableViewController: UITableViewController {
     
@@ -14,6 +15,8 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         tableView.delegate = self
+        /**https://stackoverflow.com/questions/69998770/swiftui-table-rowheight-on-macos**/
+        tableView.rowHeight = 80
         
         tableView.register(NotesTableViewCell.self, forCellReuseIdentifier: "NotesTableViewCell")
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "Header View")

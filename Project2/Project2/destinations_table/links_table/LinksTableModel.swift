@@ -23,6 +23,7 @@ class LinksTableViewModel: NSObject {
             Link(title: "Champlain College", url: URL(string: "https://www.champlain.edu/")),
             Link(title: "University of Vermont", url: URL(string: "https://www.uvm.edu/")),
             Link(title: "Kountry Kart Deli", url: URL(string: "https://www.kountrykartdeli.com/")),
+            Link(title: "Credits", url: URL(string: "https://docs.google.com/document/d/1cmISUpAR8zKVO6OpXND4j3lWUOBdFPX85Lt1PxF2d6E/edit?usp=sharing")),
         ]
     }
 }
