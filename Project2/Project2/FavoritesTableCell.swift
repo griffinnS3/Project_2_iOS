@@ -7,15 +7,12 @@
 
 import UIKit
 import SnapKit
-import AVKit
-import AVFoundation
 
 class FavoritesTableCell: UITableViewCell {
     let title = UILabel()
     let image = UIImageView()
-    var videoURL : URL?
-    var audioURL : URL?
-    let playerViewController = AVPlayerViewController()
+    let content = UILabel()
+
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -24,22 +21,14 @@ class FavoritesTableCell: UITableViewCell {
         title.textColor = .black
         contentView.addSubview(image)
         image.addSubview(title)
+        
+        if content.text != nil {
+            image.addSubview(content)
+        }
+        
         image.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
-        // Still need to figure out how to get videos or audio to display in the cell
-        /*if videoURL != nil {
-                    contentView.addSubview(playerViewController.view)
-                    
-                    playerViewController.view.frame = contentView.bounds
-                    
-                    // Set video URL
-                    if let url = URL(string: "https://example.com/video.mp4") {
-                        let player = AVPlayer(url: videoURL ?? )
-                        playerViewController.player = player
-                        player.play()
-                    }
-        }*/
         title.snp.makeConstraints { make in
             make.centerX.equalTo(image)
             make.height.equalTo(image).dividedBy(7)
@@ -60,9 +49,10 @@ class FavoritesTableCell: UITableViewCell {
         
         if let destination = vm as? Destination {
             image.image = destination.image
-        } else if let tour = vm as? Tours {
-            videoURL = tour.videoURL
-            audioURL = tour.audioURL
+        } else if vm is Tours {
+
+        } else if let note = vm as? Note {
+            content.text = note.content
         }
     }
 }

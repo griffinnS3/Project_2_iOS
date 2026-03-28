@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Note : Codable {
+struct Note : Codable, Favorite {
     var title: String
     var content: String
     var photo: Data?
