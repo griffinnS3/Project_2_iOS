@@ -34,27 +34,8 @@ class NotesViewModel : NSObject {
     func allNotes() -> [[Note]] {
         return [
             [
-                Note(title: "Note 1, Section 1", content: "Section 1"),
-                Note(title: "Note 2, Section 1", content: "Section 1"),
-                Note(title: "Note 3, Section 1", content: "Section 1"),
-                Note(title: "Note 4, Section 1", content: "Section 1"),
-                Note(title: "Note 5, Section 1", content: "Section 1"),
-                Note(title: "Note 6, Section 1", content: "Section 1"),
-                
+                Note(title: "Created By Griffin Smith and Eddy Slodobow", content: "Written March 28th 2026"),
             ],
-            [
-                Note(title: "Note 1, Section 2", content: "Section 2"),
-                Note(title: "Note 2, Section 2", content: "Section 2"),
-                Note(title: "Note 3, Section 2", content: "Section 2"),
-                Note(title: "Note 4, Section 2", content: "Section 2"),
-                Note(title: "Note 5, Section 2", content: "Section 2"),
-                Note(title: "Note 6, Section 2", content: "Section 2"),
-            ],
-            [
-                Note(title: "Note 1, Section 3", content: "Section 3"),
-                Note(title: "Note 2, Section 3", content: "Section 3"),
-                Note(title: "Note 3, Section 3", content: "Section 3"),
-            ]
         ]
     }
     func object(for indexPath: IndexPath) -> Note? {

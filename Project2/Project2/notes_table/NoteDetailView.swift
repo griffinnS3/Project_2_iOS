@@ -42,7 +42,9 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
         view.addSubview(textBar)
         view.addSubview(imageView)
        /**https://developer.apple.com/documentation/uikit/uiimagepickercontroller**/
+        /**https://stackoverflow.com/questions/56825294/swiftui-image-clipstobounds**/
         imageView.contentMode = .scaleAspectFit
+        imagePicker.delegate = self
         imageView.clipsToBounds = true
         imageView.backgroundColor = .systemGray6
         imagePicker.sourceType = .photoLibrary

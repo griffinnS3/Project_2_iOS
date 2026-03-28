@@ -10,6 +10,7 @@ class LinksViewController: UITableViewController {
     let linkvm = LinksTableViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Links"
         tableView.delegate = self
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "Header View")
         tableView.register(LinksTableViewCell.self, forCellReuseIdentifier: "LinksTableViewCell")

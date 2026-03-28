@@ -17,15 +17,19 @@ class DestinationsTableCell: UITableViewCell {
         title.backgroundColor = .white
         title.textColor = .black
         contentView.addSubview(image)
-        image.addSubview(title)
+        contentView.addSubview(title)
+        image.contentMode = .scaleAspectFit
+        image.clipsToBounds = true
         image.snp.makeConstraints { make in
-            make.edges.equalTo(contentView.safeAreaLayoutGuide)
+            make.top.bottom.right.equalTo(contentView.safeAreaLayoutGuide)
+            make.width.equalToSuperview().multipliedBy(0.50)
         }
         title.snp.makeConstraints { make in
-            make.centerX.equalTo(image)
-            make.height.equalTo(image).dividedBy(7)
-            make.width.equalTo(image)
-            make.centerY.equalTo(image).offset(-10)
+            make.centerX.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.5)
+            make.left.equalTo(contentView.snp.left)
+            make.right.equalTo(image.snp.left)
         }
     }
 

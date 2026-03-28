@@ -12,6 +12,8 @@ class DestinationsViewController: UITableViewController {
     var destinationsViewModel = DestinationTableViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 100
+        navigationItem.title = "Destinations"
         tableView.delegate = self
         tableView.register(DestinationsTableCell.self, forCellReuseIdentifier: "DestinationsCellReuseIdentifier")
     }
