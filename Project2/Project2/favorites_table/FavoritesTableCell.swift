@@ -19,21 +19,24 @@ class FavoritesTableCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         title.backgroundColor = .white
         title.textColor = .black
+        
+        contentView.addSubview(title)
         contentView.addSubview(image)
-        image.addSubview(title)
-        
         if content.text != nil {
-            image.addSubview(content)
-        }
-        
-        image.snp.makeConstraints { make in
-            make.edges.equalTo(contentView.safeAreaLayoutGuide)
+            contentView.addSubview(content)
         }
         title.snp.makeConstraints { make in
-            make.centerX.equalTo(image)
-            make.height.equalTo(image).dividedBy(7)
-            make.width.equalTo(image)
-            make.centerY.equalTo(image).offset(-10)
+            make.centerX.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.5)
+            make.left.equalTo(contentView.snp.left)
+            make.right.equalTo(image.snp.left)
+        }
+        image.contentMode = .scaleAspectFit
+        image.clipsToBounds = true
+        image.snp.makeConstraints { make in
+            make.top.bottom.right.equalTo(contentView.safeAreaLayoutGuide)
+            make.width.equalToSuperview().multipliedBy(0.50)
         }
     }
 
@@ -41,6 +44,14 @@ class FavoritesTableCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    override func prepareForReuse() {
+            super.prepareForReuse()
+            
+            title.text = nil
+            image.image = nil
+            
+            image.isHidden = false
+        }
     func configure(vm: Favorite) {
         
         // I use this function to determain what type of object is being passed

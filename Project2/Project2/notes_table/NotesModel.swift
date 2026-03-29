@@ -34,7 +34,7 @@ class NotesViewModel : NSObject {
     func allNotes() -> [[Note]] {
         return [
             [
-                Note(title: "Created By Griffin Smith and Eddy Slodobow", content: "Written March 28th 2026"),
+                Note(title: "Created By Griffin Smith and Eddie Slodobow", content: "Written March 28th 2026"),
             ],
         ]
     }

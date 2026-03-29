@@ -16,6 +16,7 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
     var isNew: Bool
     var indexPath: IndexPath?
     let imagePicker = UIImagePickerController()
+    var addFavorite = UIButton()
     
     init(title: String?, text: String?, viewModel: NotesViewModel, isNew: Bool, indexPath: IndexPath?) {
         self.vm = viewModel
@@ -41,6 +42,7 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
         view.addSubview(titleText)
         view.addSubview(textBar)
         view.addSubview(imageView)
+        view.addSubview(addFavorite)
        /**https://developer.apple.com/documentation/uikit/uiimagepickercontroller**/
         /**https://stackoverflow.com/questions/56825294/swiftui-image-clipstobounds**/
         imageView.contentMode = .scaleAspectFit
@@ -51,6 +53,10 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
         imageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(selectImage))
         imageView.addGestureRecognizer(tap)
+        addFavorite.setTitle("Add Favorite", for: .normal)
+        addFavorite.translatesAutoresizingMaskIntoConstraints = false
+        addFavorite.backgroundColor = .systemBlue
+        addFavorite.titleLabel?.font = UIFont.systemFont(ofSize: 10)
 
         let placeholder = UILabel()
         placeholder.text = "Tap to add photo"
@@ -79,6 +85,13 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
             make.width.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.3)
         }
+        addFavorite.snp.makeConstraints{ make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.width.equalTo(view).multipliedBy(0.2)
+            make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(13)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.95)
+        }
+        addFavorite.addTarget(self, action: #selector(favoriteAdded), for: .touchUpInside)
     }
        
     @objc func saveNote() {
@@ -98,6 +111,13 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     @objc func selectImage() {
         present(imagePicker, animated: true)
+    }
+    
+    @objc func favoriteAdded() {
+        print("Added to favorites")
+        let thisNote = Note(title: titleText.text ?? "", content: textBar.text ?? "")
+        favorites.append(thisNote)
+
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {

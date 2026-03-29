@@ -17,6 +17,7 @@ class DestinationDetailView: UIViewController {
     var address : String
     var background = UILabel()
     var descriptionLabel = UILabel()
+    var addFavorite = UIButton()
     
     init(labelText: String, address: String) {
         self.labelText = labelText
@@ -51,10 +52,16 @@ class DestinationDetailView: UIViewController {
             image = UIImageView(image: UIImage(named: "church_street"))
             descriptionLabel.text = "This is the heart and soul of Burlington with many shops and restaurants to enjoy."
             }
+        
+        addFavorite.setTitle("Add Favorite", for: .normal)
+        addFavorite.translatesAutoresizingMaskIntoConstraints = false
+        addFavorite.backgroundColor = .systemBlue
+        addFavorite.titleLabel?.font = UIFont.systemFont(ofSize: 10)
         view.addSubview(background)
         view.addSubview(label)
         view.addSubview(mapView)
         view.addSubview(image)
+        view.addSubview(addFavorite)
        
        
         view.addSubview(descriptionLabel)
@@ -62,9 +69,9 @@ class DestinationDetailView: UIViewController {
         descriptionLabel.numberOfLines = 0
         label.textAlignment = .center
         background.backgroundColor = .systemBackground
-                label.snp.makeConstraints { make in
+        label.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-                    make.width.equalTo(view).multipliedBy(0.5)
+            make.width.equalTo(view).multipliedBy(0.5)
             make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(10)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
         }
@@ -90,7 +97,16 @@ class DestinationDetailView: UIViewController {
             make.centerX.equalTo(view.safeAreaLayoutGuide)
             make.top.equalTo(image.snp.bottom).offset(50)
         }
+        addFavorite.snp.makeConstraints{ make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.width.equalTo(view).multipliedBy(0.2)
+            make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(13)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.95)
+        }
+        
         let gesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped))
+        addFavorite.addTarget(self, action: #selector(favoriteAdded), for: .touchUpInside)
+
         label.addGestureRecognizer(gesture)
         label.isUserInteractionEnabled = true
     }
@@ -98,6 +114,13 @@ class DestinationDetailView: UIViewController {
         dismiss(animated: true)
         navigationController?.popViewController(animated: true)
     }
+    @objc func favoriteAdded() {
+        print("Added to favorites")
+        let thisDestination = Destination(title: label.text ?? "", image: image.image)
+        favorites.append(thisDestination)
+
+    }
+    
     func addMapView(address: String) {
         let geoLocator = CLGeocoder()
         geoLocator.geocodeAddressString(address) {
