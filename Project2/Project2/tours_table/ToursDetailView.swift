@@ -54,11 +54,11 @@ class ToursDetailView: UIViewController {
             make.width.equalTo(view)
             make.centerX.equalTo(view)
         }
-        addFavorite.snp.makeConstraints{ make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(view).multipliedBy(0.2)
-            make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(13)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.95)
+        addFavorite.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.width.equalTo(100)
+            make.height.equalTo(44)
         }
         if let videoURL = videoURL {
             let player = AVPlayer(url: videoURL)

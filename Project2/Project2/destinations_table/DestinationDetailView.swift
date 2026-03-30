@@ -76,16 +76,17 @@ class DestinationDetailView: UIViewController {
             make.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         mapView.snp.makeConstraints { make in
-            make.width.equalTo(view)
+            make.width.equalTo(400)
             make.height.equalTo(view).dividedBy(7)
             make.top.equalTo(label.snp.bottom)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
         }
+        image.contentMode = .scaleAspectFit
         image.snp.makeConstraints { make in
-            make.top.equalTo(mapView.snp.bottom).offset(    50)
-            make.width.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(4)
+            make.top.equalTo(mapView.snp.bottom).offset(50)
+            //make.width.equalTo(view.safeAreaLayoutGuide)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(200)
         }
         background.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
@@ -97,11 +98,11 @@ class DestinationDetailView: UIViewController {
             make.centerX.equalTo(view.safeAreaLayoutGuide)
             make.top.equalTo(image.snp.bottom).offset(50)
         }
-        addFavorite.snp.makeConstraints{ make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(view).multipliedBy(0.2)
-            make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(13)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.95)
+        addFavorite.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.width.equalTo(100)
+            make.height.equalTo(44)
         }
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped))

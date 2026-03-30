@@ -20,6 +20,7 @@ class DestinationsTableCell: UITableViewCell {
         contentView.addSubview(title)
         image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
+        title.textAlignment = .center
         image.snp.makeConstraints { make in
             make.top.bottom.right.equalTo(contentView.safeAreaLayoutGuide)
             make.width.equalToSuperview().multipliedBy(0.50)

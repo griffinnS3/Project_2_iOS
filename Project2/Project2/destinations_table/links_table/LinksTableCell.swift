@@ -13,6 +13,7 @@ class LinksTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
+        label.textAlignment = .center
         label.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaInsets)
         }

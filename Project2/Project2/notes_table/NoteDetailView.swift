@@ -69,27 +69,27 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
         titleText.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.centerX.equalToSuperview()
+            make.centerX.equalToSuperview().offset(view.bounds.width * 0.20)
             make.width.equalToSuperview()
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.05)
+            make.height.equalTo(30)
         }
         textBar.snp.makeConstraints { make in
             make.top.equalTo(titleText.snp.bottom)
-            make.centerX.equalToSuperview()
+            make.centerX.equalToSuperview().offset(view.bounds.width * 0.20)
             make.width.equalToSuperview()
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.05)
+            make.height.equalTo(30)
         }
         imageView.snp.makeConstraints { make in
             make.top.equalTo(textBar.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview()
+            make.width.equalTo(400)
             make.height.equalToSuperview().multipliedBy(0.3)
         }
-        addFavorite.snp.makeConstraints{ make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.width.equalTo(view).multipliedBy(0.2)
-            make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(13)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.95)
+        addFavorite.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.width.equalTo(100)
+            make.height.equalTo(44)
         }
         addFavorite.addTarget(self, action: #selector(favoriteAdded), for: .touchUpInside)
     }

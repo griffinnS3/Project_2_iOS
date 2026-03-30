@@ -57,6 +57,7 @@ class ToursTableViewCell: UITableViewCell {
     }
     func configure(tour: Tours) {
         label.text = tour.title
+        label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
     }
     
