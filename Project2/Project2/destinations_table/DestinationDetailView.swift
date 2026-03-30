@@ -117,7 +117,7 @@ class DestinationDetailView: UIViewController {
     }
     @objc func favoriteAdded() {
         print("Added to favorites")
-        let thisDestination = Destination(title: label.text ?? "", image: image.image)
+        let thisDestination = Destination(title: label.text ?? "", photo: image.image?.jpegData(compressionQuality: 0.8))
         favorites.append(thisDestination)
 
     }
@@ -129,7 +129,7 @@ class DestinationDetailView: UIViewController {
             print(annotations?.first ?? "")
             let placemark = annotations?.first
             print(placemark?.location?.coordinate ?? "")
-            let coordinate = MKPointAnnotation(coordinate: placemark?.location?.coordinate ?? CLLocationCoordinate2D())
+            let coordinate = MKPointAnnotation(__coordinate: placemark?.location?.coordinate ?? CLLocationCoordinate2D())
             self.mapView.addAnnotation(coordinate)
             let areaCoordinate = placemark?.location?.coordinate ?? CLLocationCoordinate2D()
             let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)

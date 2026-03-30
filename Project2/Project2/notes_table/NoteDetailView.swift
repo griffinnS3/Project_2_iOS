@@ -57,15 +57,17 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
         addFavorite.translatesAutoresizingMaskIntoConstraints = false
         addFavorite.backgroundColor = .systemBlue
         addFavorite.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-
-        let placeholder = UILabel()
-        placeholder.text = "Tap to add photo"
-        placeholder.textAlignment = .center
-        imageView.addSubview(placeholder)
-        placeholder.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        if selectedImage == nil {
+            let placeholder = UILabel()
+            placeholder.text = "Tap to add photo"
+            placeholder.textAlignment = .center
+            imageView.addSubview(placeholder)
+            placeholder.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        } else {
+            imageView.addSubview(UIImageView(image: selectedImage))
         }
-
         
         titleText.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)

@@ -19,7 +19,10 @@ class FavoritesTableCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         title.backgroundColor = .white
         title.textColor = .black
+
         title.textAlignment = .center
+
+
         
         contentView.addSubview(title)
         contentView.addSubview(image)

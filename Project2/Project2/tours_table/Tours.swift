@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 /**https://stackoverflow.com/questions/25348877/how-to-play-a-local-video-with-swift**/
-struct Tours : Favorite{
+struct Tours : Favorite, Codable{
 var title: String
 var videoURL: URL?
 var audioURL: URL?
@@ -48,6 +48,8 @@ class ToursTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
+        label.font = .systemFont(ofSize: 30, weight: .medium)
+        label.textAlignment = .center
         label.snp.makeConstraints { make in
             make.height.equalTo(contentView).dividedBy(3)
             make.width.equalTo(contentView.safeAreaLayoutGuide)
