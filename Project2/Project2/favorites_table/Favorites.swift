@@ -15,14 +15,19 @@ class FavoritesView: UITableViewController {
         tableView.delegate = self
         tableView.rowHeight = 100
         navigationItem.title = "Favorites"
+        navigationItem.rightBarButtonItem = editButtonItem
         tableView.register(FavoritesTableCell.self, forCellReuseIdentifier: "FavoritesCellReuseIdentifier")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("3. viewDidAppear - Now visible, start animations")
+//        print("3. viewDidAppear - Now visible, start animations")
         favoriteViewModel.refresh()
         tableView.reloadData()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+       super.viewWillDisappear(animated)
+        favoriteViewModel.save()
     }
     
     
@@ -58,5 +63,13 @@ class FavoritesView: UITableViewController {
             tableView.reloadData()
         }
     }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        favoriteViewModel.swap(source: sourceIndexPath, destination: destinationIndexPath)
+        tableView.reloadData()
+    }
 }
+
 

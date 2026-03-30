@@ -35,7 +35,7 @@ class NotesViewModel : NSObject {
         return [
             [
                 Note(title: "Created By Griffin Smith and Eddie Slodobow", content: "Written March 28th 2026"),
-            ],
+            ],  
         ]
     }
     func object(for indexPath: IndexPath) -> Note? {
