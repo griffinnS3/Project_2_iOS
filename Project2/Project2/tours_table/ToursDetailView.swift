@@ -18,7 +18,7 @@ class ToursDetailView: UIViewController {
     var videoPlayer = AVPlayerViewController()
     var audioPlayer = AVPlayerViewController()
     var background = UILabel()
-    var addFavorite = UIButton()
+    var addFavorite = UIButton(type: .system)
     
     init(title: String, videoURL: URL?, audioURL: URL?) {
         self.tourTitle = title
@@ -34,6 +34,7 @@ class ToursDetailView: UIViewController {
         addFavorite.translatesAutoresizingMaskIntoConstraints = false
         addFavorite.backgroundColor = .systemBlue
         addFavorite.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+        addFavorite.setTitleColor(.white, for: .normal)
         view.addSubview(background)
         view.addSubview(videoPlayer.view)
         view.addSubview(audioPlayer.view)
@@ -45,18 +46,18 @@ class ToursDetailView: UIViewController {
         videoPlayer.view.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
             make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(3)
-            make.width.equalTo(view)
+            make.width.equalTo(400)
             make.centerX.equalTo(view)
         }
         audioPlayer.view.snp.makeConstraints { make in
             make.top.equalTo(videoPlayer.view.snp.bottom).offset(50)
             make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(3)
-            make.width.equalTo(view)
+            make.width.equalTo(400)
             make.centerX.equalTo(view)
         }
         addFavorite.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide)
             make.width.equalTo(100)
             make.height.equalTo(44)
         }
@@ -74,7 +75,6 @@ class ToursDetailView: UIViewController {
     }
     
     @objc func favoriteAdded() {
-        print("Added to favorites")
         let thisTour = Tours(title: tourTitle, videoURL: videoURL, audioURL: audioURL)
         favorites.append(thisTour)
 

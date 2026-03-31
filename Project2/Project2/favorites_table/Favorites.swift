@@ -21,7 +21,6 @@ class FavoritesView: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        print("3. viewDidAppear - Now visible, start animations")
         favoriteViewModel.refresh()
         tableView.reloadData()
     }

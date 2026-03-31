@@ -17,7 +17,7 @@ class DestinationDetailView: UIViewController {
     var address : String
     var background = UILabel()
     var descriptionLabel = UILabel()
-    var addFavorite = UIButton()
+    var addFavorite = UIButton(type: .system)
     
     init(labelText: String, address: String) {
         self.labelText = labelText
@@ -54,9 +54,11 @@ class DestinationDetailView: UIViewController {
             }
         
         addFavorite.setTitle("Add Favorite", for: .normal)
+        addFavorite.setTitleColor(.white, for: .normal)
         addFavorite.translatesAutoresizingMaskIntoConstraints = false
         addFavorite.backgroundColor = .systemBlue
         addFavorite.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+        descriptionLabel.textAlignment = .center
         view.addSubview(background)
         view.addSubview(label)
         view.addSubview(mapView)
@@ -70,15 +72,15 @@ class DestinationDetailView: UIViewController {
         label.textAlignment = .center
         background.backgroundColor = .systemBackground
         label.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view).offset(70)
             make.width.equalTo(view).multipliedBy(0.5)
             make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(10)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         mapView.snp.makeConstraints { make in
             make.width.equalTo(400)
-            make.height.equalTo(view).dividedBy(7)
-            make.top.equalTo(label.snp.bottom)
+            make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(4)
+            make.top.equalTo(label.snp.bottom).offset(10)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         image.contentMode = .scaleAspectFit
@@ -86,7 +88,7 @@ class DestinationDetailView: UIViewController {
             make.top.equalTo(mapView.snp.bottom).offset(50)
             //make.width.equalTo(view.safeAreaLayoutGuide)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(200)
+            make.height.equalTo(view.safeAreaLayoutGuide).dividedBy(4)
         }
         background.snp.makeConstraints { make in
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
@@ -99,14 +101,14 @@ class DestinationDetailView: UIViewController {
             make.top.equalTo(image.snp.bottom).offset(50)
         }
         addFavorite.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.top.equalTo(view).offset(70)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
             make.width.equalTo(100)
             make.height.equalTo(44)
         }
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped))
-        addFavorite.addTarget(self, action: #selector(favoriteAdded), for: .touchUpInside)
+        addFavorite.addTarget(self, action: #selector(favoriteAdded), for: .touchDown)
 
         label.addGestureRecognizer(gesture)
         label.isUserInteractionEnabled = true
@@ -116,7 +118,6 @@ class DestinationDetailView: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc func favoriteAdded() {
-        print("Added to favorites")
         let thisDestination = Destination(title: label.text ?? "", photo: image.image?.jpegData(compressionQuality: 0.8))
         favorites.append(thisDestination)
 
@@ -129,7 +130,7 @@ class DestinationDetailView: UIViewController {
             print(annotations?.first ?? "")
             let placemark = annotations?.first
             print(placemark?.location?.coordinate ?? "")
-            let coordinate = MKPointAnnotation(__coordinate: placemark?.location?.coordinate ?? CLLocationCoordinate2D())
+            let coordinate = MKPointAnnotation(coordinate: placemark?.location?.coordinate ?? CLLocationCoordinate2D())
             self.mapView.addAnnotation(coordinate)
             let areaCoordinate = placemark?.location?.coordinate ?? CLLocationCoordinate2D()
             let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)

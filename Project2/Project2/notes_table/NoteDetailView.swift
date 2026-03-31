@@ -16,7 +16,7 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
     var isNew: Bool
     var indexPath: IndexPath?
     let imagePicker = UIImagePickerController()
-    var addFavorite = UIButton()
+    var addFavorite = UIButton(type: .system)
     
     init(title: String?, text: String?, viewModel: NotesViewModel, isNew: Bool, indexPath: IndexPath?) {
         self.vm = viewModel
@@ -54,6 +54,7 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let tap = UITapGestureRecognizer(target: self, action: #selector(selectImage))
         imageView.addGestureRecognizer(tap)
         addFavorite.setTitle("Add Favorite", for: .normal)
+        addFavorite.setTitleColor(.white, for: .normal)
         addFavorite.translatesAutoresizingMaskIntoConstraints = false
         addFavorite.backgroundColor = .systemBlue
         addFavorite.titleLabel?.font = UIFont.systemFont(ofSize: 10)
@@ -116,7 +117,6 @@ class NoteDetailView: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @objc func favoriteAdded() {
-        print("Added to favorites")
         let thisNote = Note(title: titleText.text ?? "", content: textBar.text ?? "")
         favorites.append(thisNote)
 
